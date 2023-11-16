@@ -61,6 +61,7 @@ public class ReservaServiceImpl implements ReservaService {
         Reserva reserva = reservaMapper.toEntity(reservaDTO);
 
         return reservaMapper.toDto(reservasRepository.save(reserva));
+        //done
     }
 
     @Override
@@ -118,7 +119,7 @@ public class ReservaServiceImpl implements ReservaService {
     private boolean checkSiEsRangoFechaCoherente(Date fechaInicio, Date fechaFin) {
         LocalDate fechaInicioLocalDate = fechaInicio.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate fechaFinLocalDate = fechaFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
+        //calculad
         return (fechaFinLocalDate.isAfter(fechaInicioLocalDate) && fechaFinLocalDate.minusDays(1).isAfter(fechaInicioLocalDate));
     }
 

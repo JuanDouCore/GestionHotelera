@@ -145,7 +145,7 @@ class ReservaServiceImplTest {
     @Test
     void crearReserva() {
         Reserva reserva = reservaMapper.toEntity(reservaDTO);
-        when(reservasRepository.verificarDisponibiliadadHabitacion(1, 1, fechaIngreso, fechaEgreso)).thenReturn(true);
+        when(reservasRepository.verificarSiHabitacionEstaDisponible(1, 1, fechaIngreso, fechaEgreso)).thenReturn(true);
         when(hotelService.buscarHotelPorId(1)).thenReturn(hotel);
         when(habitacionService.buscarHabitacionPorNroYHotel(1, 1)).thenReturn(habitacion);
         when(clienteService.buscarClientePorDni(44560065)).thenReturn(cliente);
@@ -153,7 +153,7 @@ class ReservaServiceImplTest {
 
         ReservaDTO reservaCreada = reservaService.crearReserva(1, crearReservaDTO);
 
-        verify(reservasRepository).verificarDisponibiliadadHabitacion(1, 1, fechaIngreso, fechaEgreso);
+        verify(reservasRepository).verificarSiHabitacionEstaDisponible(1, 1, fechaIngreso, fechaEgreso);
         verify(hotelService).buscarHotelPorId(1);
         verify(habitacionService).buscarHabitacionPorNroYHotel(1, 1);
         verify(clienteService).buscarClientePorDni(44560065);
