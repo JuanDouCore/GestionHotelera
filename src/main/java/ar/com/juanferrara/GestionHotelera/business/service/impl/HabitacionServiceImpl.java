@@ -58,6 +58,15 @@ public class HabitacionServiceImpl implements HabitacionService {
         return habitacionMapper.toDto(habitacion);
     }
 
+    @Override
+    public int obtenerIdHabitacionPorNroYHotel(int idHotel, int nroHabitacion) {
+        verificarSiExisteHotel(idHotel);
+
+        Habitacion habitacion = habitacionRepository.findByNroAndHotel(idHotel, nroHabitacion)
+                .orElseThrow(() -> new NotFoundException("No existe habitacion con este numero"));
+
+        return habitacion.getId();
+    }
 
     @Override
     public HabitacionDTO eliminarHabitacion(int idHotel, int idHabitacion) {

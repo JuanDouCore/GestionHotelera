@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -164,5 +165,103 @@ class ReservaServiceImplTest {
            assertEquals(hotel, reservaCreada.getHotel());
            assertEquals(1000, reservaCreada.getCostoTotal());
         });
+    }
+
+    @Test
+    void modificarReservaFechas() {
+        Date fechaEgresoSecondary = null;
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            fechaEgresoSecondary = formato.parse("2023-11-25");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        CrearReservaDTO crearReservaDTOSecondary = CrearReservaDTO.builder()
+                .fechaEgreso(fechaEgresoSecondary)
+                .tipoPension(TipoPension.COMPLETA)
+                .build();
+        Reserva reserva = reservaMapper.toEntity(reservaDTO);
+        when(reservasRepository.findById(1)).thenReturn(Optional.ofNullable(reserva));
+        when(reservasRepository.verificarSiHabitacionEstaDisponible(1, 1, fechaIngreso, fechaEgresoSecondary)).thenReturn(true);
+        when(reservasRepository.save(any(Reserva.class))).thenReturn(reserva);
+
+        ReservaDTO reservaModificada = reservaService.modificarReserva(1, crearReservaDTOSecondary);
+
+        verify(reservasRepository).findById(1);
+        verify(reservasRepository).verificarSiHabitacionEstaDisponible(1, 1, fechaIngreso, fechaEgresoSecondary);
+        verify(reservasRepository).save(any(Reserva.class));
+        Date finalFechaEgresoSecondary = fechaEgresoSecondary;
+        assertAll(() -> {
+            assertEquals(1, reservaModificada.getId());
+            assertEquals(TipoPension.COMPLETA, reserva.getTipoPension());
+            assertEquals(finalFechaEgresoSecondary, reservaModificada.getFechaEgreso());
+            assertEquals(fechaIngreso, reservaModificada.getFechaIngreso());
+            assertEquals(2000, reservaModificada.getCostoTotal());
+        });
+    }
+
+    @Test
+    void modificarReservaHabitacion() {
+        HabitacionDTO habitacionDTOSecondary = HabitacionDTO.builder()
+                .hotel(hotel)
+                .numero(2)
+                .categoriaHabitacion(habitacion.getCategoriaHabitacion())
+                .precio(500.0)
+                .camas(1)
+                .capacidad(4)
+                .build();
+        CrearReservaDTO crearReservaDTOSecondary = CrearReservaDTO.builder()
+                .nroHabitacion(2)
+                .build();
+        Reserva reserva = reservaMapper.toEntity(reservaDTO);
+        when(reservasRepository.findById(1)).thenReturn(Optional.ofNullable(reserva));
+        when(habitacionService.buscarHabitacionPorNroYHotel(1, 2)).thenReturn(habitacionDTOSecondary);
+        when(reservasRepository.verificarSiHabitacionEstaDisponible(1, 2, fechaIngreso, fechaEgreso)).thenReturn(true);
+        when(reservasRepository.save(any(Reserva.class))).thenReturn(reserva);
+
+        ReservaDTO reservaModificada = reservaService.modificarReserva(1, crearReservaDTOSecondary);
+
+        verify(reservasRepository).findById(1);
+        verify(reservasRepository).verificarSiHabitacionEstaDisponible(1, 2, fechaIngreso, fechaEgreso);
+        verify(reservasRepository).save(any(Reserva.class));
+        assertAll(() -> {
+            assertEquals(1, reservaModificada.getId());
+            assertEquals(habitacionDTOSecondary, reservaModificada.getHabitacion());
+            assertEquals(2500, reservaModificada.getCostoTotal());
+        });
+    }
+
+    @Test
+    void modificarReservaCliente() {
+        ClienteDTO clienteDTOSecondary = ClienteDTO.builder()
+                .dni(45000123)
+                .nombre("Jorge")
+                .apellido("Lopez")
+                .direccion(direccionDTO)
+                .email("jorgito@gmail.com")
+                .telefono(11223311)
+                .build();
+        CrearReservaDTO crearReservaDTOSecondary = CrearReservaDTO.builder()
+                .dniCliente(45000123)
+                .build();
+        Reserva reserva = reservaMapper.toEntity(reservaDTO);
+        when(reservasRepository.findById(1)).thenReturn(Optional.ofNullable(reserva));
+        when(clienteService.buscarClientePorDni(45000123)).thenReturn(clienteDTOSecondary);
+        when(reservasRepository.save(any(Reserva.class))).thenReturn(reserva);
+
+        ReservaDTO reservaModificada = reservaService.modificarReserva(1, crearReservaDTOSecondary);
+
+        verify(reservasRepository).findById(1);
+        verify(clienteService).buscarClientePorDni(45000123);
+        verify(reservasRepository).save(any(Reserva.class));
+        assertAll(() -> {
+            assertEquals(1, reservaModificada.getId());
+            assertEquals(clienteDTOSecondary, reservaModificada.getCliente());
+        });
+    }
+
+    @Test
+    void confirmarnComienzoEstadia() {
+
     }
 }
