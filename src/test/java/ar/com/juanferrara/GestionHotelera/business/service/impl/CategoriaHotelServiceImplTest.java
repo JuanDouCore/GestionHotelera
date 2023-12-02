@@ -2,10 +2,9 @@ package ar.com.juanferrara.GestionHotelera.business.service.impl;
 
 import ar.com.juanferrara.GestionHotelera.business.mapper.impl.CategoriaHotelMapper;
 import ar.com.juanferrara.GestionHotelera.business.mapper.impl.CategoriaHotelMapperImpl;
-import ar.com.juanferrara.GestionHotelera.domain.dto.CategoriaHotelDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.categorias.CategoriaHotelDTO;
 import ar.com.juanferrara.GestionHotelera.domain.entity.CategoriaHotel;
 import ar.com.juanferrara.GestionHotelera.persistence.CategoriaHotelRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;

@@ -5,11 +5,10 @@ import ar.com.juanferrara.GestionHotelera.business.mapper.impl.CrearHotelMapperI
 import ar.com.juanferrara.GestionHotelera.business.mapper.impl.HotelMapper;
 import ar.com.juanferrara.GestionHotelera.business.mapper.impl.HotelMapperImpl;
 import ar.com.juanferrara.GestionHotelera.business.service.CategoriaHotelService;
-import ar.com.juanferrara.GestionHotelera.domain.dto.CategoriaHotelDTO;
-import ar.com.juanferrara.GestionHotelera.domain.dto.CrearHotelDTO;
-import ar.com.juanferrara.GestionHotelera.domain.dto.DireccionDTO;
-import ar.com.juanferrara.GestionHotelera.domain.dto.HotelDTO;
-import ar.com.juanferrara.GestionHotelera.domain.entity.CategoriaHotel;
+import ar.com.juanferrara.GestionHotelera.domain.dto.categorias.CategoriaHotelDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.hotel.CrearHotelDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.generic.DireccionDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.hotel.HotelDTO;
 import ar.com.juanferrara.GestionHotelera.domain.entity.Hotel;
 import ar.com.juanferrara.GestionHotelera.persistence.HotelRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 

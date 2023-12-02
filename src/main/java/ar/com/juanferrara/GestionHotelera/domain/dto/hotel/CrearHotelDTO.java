@@ -1,5 +1,6 @@
-package ar.com.juanferrara.GestionHotelera.domain.dto;
+package ar.com.juanferrara.GestionHotelera.domain.dto.hotel;
 
+import ar.com.juanferrara.GestionHotelera.domain.dto.generic.DireccionDTO;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

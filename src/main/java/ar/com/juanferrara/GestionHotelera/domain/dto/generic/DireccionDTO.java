@@ -1,4 +1,4 @@
-package ar.com.juanferrara.GestionHotelera.domain.dto;
+package ar.com.juanferrara.GestionHotelera.domain.dto.generic;
 
 import jakarta.validation.constraints.Size;
 import lombok.*;

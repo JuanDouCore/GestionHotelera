@@ -1,6 +1,7 @@
-package ar.com.juanferrara.GestionHotelera.domain.dto;
+package ar.com.juanferrara.GestionHotelera.domain.dto.habitacion;
 
-import ar.com.juanferrara.GestionHotelera.domain.entity.Hotel;
+import ar.com.juanferrara.GestionHotelera.domain.dto.hotel.HotelDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.categorias.CategoriaHabitacionDTO;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
 

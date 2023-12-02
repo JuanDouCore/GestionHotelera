@@ -1,7 +1,7 @@
 package ar.com.juanferrara.GestionHotelera.business.mapper.impl;
 
 import ar.com.juanferrara.GestionHotelera.business.mapper.IMapper;
-import ar.com.juanferrara.GestionHotelera.domain.dto.CategoriaHabitacionDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.categorias.CategoriaHabitacionDTO;
 import ar.com.juanferrara.GestionHotelera.domain.entity.CategoriaHabitacion;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValueCheckStrategy;

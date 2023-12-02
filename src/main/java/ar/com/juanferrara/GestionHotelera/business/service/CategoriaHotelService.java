@@ -1,7 +1,6 @@
 package ar.com.juanferrara.GestionHotelera.business.service;
 
-import ar.com.juanferrara.GestionHotelera.domain.dto.CategoriaHotelDTO;
-import ar.com.juanferrara.GestionHotelera.domain.entity.CategoriaHotel;
+import ar.com.juanferrara.GestionHotelera.domain.dto.categorias.CategoriaHotelDTO;
 
 import java.util.List;
 

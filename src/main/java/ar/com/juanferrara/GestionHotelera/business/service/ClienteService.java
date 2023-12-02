@@ -1,7 +1,6 @@
 package ar.com.juanferrara.GestionHotelera.business.service;
 
-import ar.com.juanferrara.GestionHotelera.domain.dto.ClienteDTO;
-import ch.qos.logback.core.net.server.Client;
+import ar.com.juanferrara.GestionHotelera.domain.dto.usuarios.ClienteDTO;
 
 import java.util.List;
 

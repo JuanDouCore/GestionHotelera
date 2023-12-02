@@ -1,4 +1,4 @@
-package ar.com.juanferrara.GestionHotelera.domain.dto;
+package ar.com.juanferrara.GestionHotelera.domain.dto.reservas;
 
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;

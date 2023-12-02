@@ -1,6 +1,10 @@
 package ar.com.juanferrara.GestionHotelera.business.service;
 
-import ar.com.juanferrara.GestionHotelera.domain.dto.*;
+import ar.com.juanferrara.GestionHotelera.domain.dto.habitacion.HabitacionDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.reservas.CrearReservaDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.reservas.CriterioReservaHabitacionDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.reservas.InfoReservaDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.reservas.ReservaDTO;
 
 import java.util.Date;
 import java.util.List;
@@ -16,10 +20,11 @@ public interface ReservaService {
     List<ReservaDTO> listarTodasReservas();
 
     //metodos de reservas por hoteles
-    ReservaDTO crearReserva(int idHotel, CrearReservaDTO crearReservaDTO);
-    ReservaDTO confirmarComienzoEstadia(int idHotel, int id, double cantidadAbonada);
+    InfoReservaDTO crearReserva(int idHotel, CrearReservaDTO crearReservaDTO);
+    InfoReservaDTO confirmarComienzoEstadia(int idHotel, int id, double cantidadAbonada);
     HabitacionDTO obtenerHabitacionDisponibleSegunCriterio(int idHotel, CriterioReservaHabitacionDTO criterioReservaHabitacionDTO);
-    List<ReservaDTO> listarReservasDeUnHotel(int idHotel);
+    List<InfoReservaDTO> listarReservasDeUnHotel(int idHotel);
     Map<Date, List<Integer>> obtenerHabitacionesDisponiblesEnRangoDeFecha(int idHotel, CriterioReservaHabitacionDTO criterioReservaHabitacionDTO, Date fechaMesYAnio);
+    List<InfoReservaDTO> obtenerReservasDeUnCliente(int dniCliente);
 
 }

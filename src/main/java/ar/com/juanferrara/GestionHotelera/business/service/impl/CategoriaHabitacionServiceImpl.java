@@ -4,7 +4,7 @@ import ar.com.juanferrara.GestionHotelera.business.mapper.impl.CategoriaHabitaci
 import ar.com.juanferrara.GestionHotelera.business.service.CategoriaHabitacionService;
 import ar.com.juanferrara.GestionHotelera.domain.exceptions.CategoriaException;
 import ar.com.juanferrara.GestionHotelera.domain.exceptions.NotFoundException;
-import ar.com.juanferrara.GestionHotelera.domain.dto.CategoriaHabitacionDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.categorias.CategoriaHabitacionDTO;
 import ar.com.juanferrara.GestionHotelera.domain.entity.CategoriaHabitacion;
 import ar.com.juanferrara.GestionHotelera.persistence.CategoriaHabitacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;

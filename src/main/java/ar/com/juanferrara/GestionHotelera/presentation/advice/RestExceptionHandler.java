@@ -1,7 +1,7 @@
 package ar.com.juanferrara.GestionHotelera.presentation.advice;
 
 import ar.com.juanferrara.GestionHotelera.domain.exceptions.*;
-import ar.com.juanferrara.GestionHotelera.domain.dto.ExceptionErrorDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.generic.ExceptionErrorDTO;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +18,24 @@ import java.util.Map;
 @ControllerAdvice
 public class RestExceptionHandler {
 
+    @ExceptionHandler(value = {TokenRefreshException.class})
+    @ResponseBody
+    public ResponseEntity<ExceptionErrorDTO> handleTokenRefreshException(TokenRefreshException exception) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(new ExceptionErrorDTO(exception.getMessage()));
+    }
+
     @ExceptionHandler(value = {NotFoundException.class})
     @ResponseBody
     public ResponseEntity<ExceptionErrorDTO> handleNotFoundException(NotFoundException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ExceptionErrorDTO(exception.getMessage()));
+    }
+
+    @ExceptionHandler(value = {UsuarioException.class})
+    @ResponseBody
+    public ResponseEntity<ExceptionErrorDTO> handleUsuarioException(UsuarioException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(new ExceptionErrorDTO(exception.getMessage()));
     }
 

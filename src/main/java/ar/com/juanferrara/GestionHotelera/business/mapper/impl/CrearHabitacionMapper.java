@@ -1,9 +1,8 @@
 package ar.com.juanferrara.GestionHotelera.business.mapper.impl;
 
 import ar.com.juanferrara.GestionHotelera.business.mapper.IMapper;
-import ar.com.juanferrara.GestionHotelera.domain.dto.CrearHabitacionDTO;
-import ar.com.juanferrara.GestionHotelera.domain.dto.HabitacionDTO;
-import ar.com.juanferrara.GestionHotelera.domain.entity.CategoriaHotel;
+import ar.com.juanferrara.GestionHotelera.domain.dto.habitacion.CrearHabitacionDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.habitacion.HabitacionDTO;
 import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 

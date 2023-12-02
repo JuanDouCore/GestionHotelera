@@ -1,7 +1,8 @@
-package ar.com.juanferrara.GestionHotelera.domain.dto;
+package ar.com.juanferrara.GestionHotelera.domain.dto.reservas;
 
 import ar.com.juanferrara.GestionHotelera.domain.enums.EstadoReservacion;
 import ar.com.juanferrara.GestionHotelera.domain.enums.TipoPension;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;

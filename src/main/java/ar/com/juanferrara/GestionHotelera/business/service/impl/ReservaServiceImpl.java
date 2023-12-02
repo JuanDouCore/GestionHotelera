@@ -1,15 +1,17 @@
 package ar.com.juanferrara.GestionHotelera.business.service.impl;
 
 import ar.com.juanferrara.GestionHotelera.business.mapper.impl.CrearReservaMapper;
+import ar.com.juanferrara.GestionHotelera.business.mapper.impl.InfoReservaMapper;
 import ar.com.juanferrara.GestionHotelera.business.mapper.impl.ReservaMapper;
 import ar.com.juanferrara.GestionHotelera.business.service.ClienteService;
 import ar.com.juanferrara.GestionHotelera.business.service.HabitacionService;
 import ar.com.juanferrara.GestionHotelera.business.service.HotelService;
 import ar.com.juanferrara.GestionHotelera.business.service.ReservaService;
-import ar.com.juanferrara.GestionHotelera.domain.dto.CrearReservaDTO;
-import ar.com.juanferrara.GestionHotelera.domain.dto.CriterioReservaHabitacionDTO;
-import ar.com.juanferrara.GestionHotelera.domain.dto.HabitacionDTO;
-import ar.com.juanferrara.GestionHotelera.domain.dto.ReservaDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.habitacion.HabitacionDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.reservas.CrearReservaDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.reservas.CriterioReservaHabitacionDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.reservas.InfoReservaDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.reservas.ReservaDTO;
 import ar.com.juanferrara.GestionHotelera.domain.entity.Reserva;
 import ar.com.juanferrara.GestionHotelera.domain.enums.EstadoReservacion;
 import ar.com.juanferrara.GestionHotelera.domain.exceptions.NotFoundException;
@@ -35,6 +37,8 @@ public class ReservaServiceImpl implements ReservaService {
     private ReservaMapper reservaMapper;
     @Autowired
     private CrearReservaMapper crearReservaMapper;
+    @Autowired
+    private InfoReservaMapper infoReservaMapper;
 
     @Autowired
     private HotelService hotelService;
@@ -45,7 +49,7 @@ public class ReservaServiceImpl implements ReservaService {
 
 
     @Override
-    public ReservaDTO crearReserva(int idHotel, CrearReservaDTO crearReservaDTO) {
+    public InfoReservaDTO crearReserva(int idHotel, CrearReservaDTO crearReservaDTO) {
         if (!checkSiEsRangoFechaCoherente(crearReservaDTO.getFechaIngreso(), crearReservaDTO.getFechaEgreso()))
             throw new ReservaException("El rango de fechas ingresado es incorrecto");
 
@@ -62,7 +66,7 @@ public class ReservaServiceImpl implements ReservaService {
         Reserva reserva = reservaMapper.toEntity(reservaDTO);
         reserva.getHabitacion().setId(habitacionService.obtenerIdHabitacionPorNroYHotel(idHotel, crearReservaDTO.getNroHabitacion()));
 
-        return reservaMapper.toDto(reservasRepository.save(reserva));
+        return infoReservaMapper.convertirADTO(reservasRepository.save(reserva));
     }
 
     @Override
@@ -72,6 +76,7 @@ public class ReservaServiceImpl implements ReservaService {
 
         return reservaMapper.toDto(reserva);
     }
+
 
     @Override
     public ReservaDTO eliminarReserva(int id) {
@@ -127,16 +132,18 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
-    public ReservaDTO confirmarComienzoEstadia(int idHotel, int id, double cantidadAbonada) {
+    public InfoReservaDTO confirmarComienzoEstadia(int idHotel, int id, double cantidadAbonada) {
         Reserva reserva = reservasRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("No existe reserva con esta ID"));
+
+
 
         reserva.setEstadoReservacion(EstadoReservacion.CONFIRMADO);
         reserva.setCantidadAbonada(cantidadAbonada);
 
         reservasRepository.save(reserva);
 
-        return reservaMapper.toDto(reserva);
+        return infoReservaMapper.convertirADTO(reserva);
     }
 
 
@@ -172,8 +179,8 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
-    public List<ReservaDTO> listarReservasDeUnHotel(int idHotel) {
-        return reservaMapper.toDTOList(reservasRepository.listarReservasDeHotel(idHotel));
+    public List<InfoReservaDTO> listarReservasDeUnHotel(int idHotel) {
+        return infoReservaMapper.convertirAListaInfoDTO(reservasRepository.listarReservasDeHotel(idHotel));
     }
 
     public Map<Date, List<Integer>> obtenerHabitacionesDisponiblesEnRangoDeFecha(int idHotel, CriterioReservaHabitacionDTO criterioReservaHabitacionDTO, Date fechaMesYAnio) {
@@ -202,6 +209,14 @@ public class ReservaServiceImpl implements ReservaService {
                         fecha -> obtenerNroHabitacionesDisponiblesEnFecha(idHotel, habitaciones, reservasEnRango, Date.from(fecha.atStartOfDay(ZoneId.systemDefault()).toInstant())),
                         (existing, replacement) -> existing,
                         TreeMap::new));
+    }
+
+    @Override
+    public List<InfoReservaDTO> obtenerReservasDeUnCliente(int dniCliente) {
+        if(!clienteService.existeClientePorDni(dniCliente))
+            throw new NotFoundException("No existe cliente con este DNI");
+
+        return infoReservaMapper.convertirAListaInfoDTO(reservasRepository.listarReservasDeCliente(dniCliente));
     }
 
 

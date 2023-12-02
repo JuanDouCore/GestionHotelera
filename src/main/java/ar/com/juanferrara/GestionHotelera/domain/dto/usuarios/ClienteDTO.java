@@ -1,6 +1,6 @@
-package ar.com.juanferrara.GestionHotelera.domain.dto;
+package ar.com.juanferrara.GestionHotelera.domain.dto.usuarios;
 
-import ar.com.juanferrara.GestionHotelera.domain.entity.Direccion;
+import ar.com.juanferrara.GestionHotelera.domain.dto.generic.DireccionDTO;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;

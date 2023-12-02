@@ -1,10 +1,8 @@
 package ar.com.juanferrara.GestionHotelera.business.mapper.impl;
 
 import ar.com.juanferrara.GestionHotelera.business.mapper.IMapper;
-import ar.com.juanferrara.GestionHotelera.domain.dto.CrearReservaDTO;
-import ar.com.juanferrara.GestionHotelera.domain.dto.HabitacionDTO;
-import ar.com.juanferrara.GestionHotelera.domain.dto.ReservaDTO;
-import ar.com.juanferrara.GestionHotelera.domain.entity.Reserva;
+import ar.com.juanferrara.GestionHotelera.domain.dto.reservas.CrearReservaDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.reservas.ReservaDTO;
 import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 

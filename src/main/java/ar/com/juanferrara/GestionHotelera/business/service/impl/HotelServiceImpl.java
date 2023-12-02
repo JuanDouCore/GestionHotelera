@@ -7,8 +7,8 @@ import ar.com.juanferrara.GestionHotelera.business.service.CategoriaHotelService
 import ar.com.juanferrara.GestionHotelera.business.service.HotelService;
 import ar.com.juanferrara.GestionHotelera.domain.exceptions.HotelException;
 import ar.com.juanferrara.GestionHotelera.domain.exceptions.NotFoundException;
-import ar.com.juanferrara.GestionHotelera.domain.dto.CrearHotelDTO;
-import ar.com.juanferrara.GestionHotelera.domain.dto.HotelDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.hotel.CrearHotelDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.hotel.HotelDTO;
 import ar.com.juanferrara.GestionHotelera.domain.entity.Hotel;
 import ar.com.juanferrara.GestionHotelera.persistence.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,7 +98,6 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public List<HotelDTO> listarTodosHoteles() {
-        List<HotelDTO> hotelDTOList = hotelMapper.toDTOList(hotelRepository.findAll());
-        return hotelDTOList;
+        return hotelMapper.toDTOList(hotelRepository.findAll());
     }
 }

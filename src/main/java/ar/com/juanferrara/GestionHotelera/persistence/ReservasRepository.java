@@ -27,4 +27,8 @@ public interface ReservasRepository extends JpaRepository<Reserva, Integer> {
     @Query("SELECT r FROM Reserva r " +
             "WHERE r.hotel.id = :idHotel")
     List<Reserva> listarReservasDeHotel(int idHotel);
+
+    @Query("SELECT r FROM Reserva r " +
+            "WHERE r.cliente.dni = :dniCliente")
+    List<Reserva> listarReservasDeCliente(int dniCliente);
 }
