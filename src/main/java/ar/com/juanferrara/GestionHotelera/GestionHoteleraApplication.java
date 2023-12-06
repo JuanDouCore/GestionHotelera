@@ -17,26 +17,5 @@ public class GestionHoteleraApplication {
 		SpringApplication.run(GestionHoteleraApplication.class, args);
 	}
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	@Autowired
-	private UsuarioRepository usuarioRepository;
-
-	@Bean
-	public CommandLineRunner commandLineRunner() {
-		return args -> {
-			Usuario usuario = Usuario.builder()
-					.dni(44560065)
-					.nombre("Juan")
-					.username("juanferrara")
-					.idHotelAsignado(1)
-					.nombre("GRAN ALVEAR")
-					.role(Role.GERENTE)
-					.password(passwordEncoder.encode("hola123"))
-					.build();
-
-			usuarioRepository.save(usuario);
-		};
-		}
 
 }

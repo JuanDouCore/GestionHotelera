@@ -5,6 +5,7 @@ import ar.com.juanferrara.GestionHotelera.domain.dto.habitacion.HabitacionDTO;
 import ar.com.juanferrara.GestionHotelera.domain.dto.reservas.CrearReservaDTO;
 import ar.com.juanferrara.GestionHotelera.domain.dto.reservas.CriterioReservaHabitacionDTO;
 import ar.com.juanferrara.GestionHotelera.domain.dto.reservas.InfoReservaDTO;
+import ar.com.juanferrara.GestionHotelera.domain.enums.TipoPension;
 import ar.com.juanferrara.GestionHotelera.domain.exceptions.ReservaException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -69,8 +70,30 @@ public class ReservaHotelController {
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR') || hasRole('ROLE_GERENTE') || hasRole('ROLE_EMPLEADO') && principal.idHotelAsignado == #idHotel")
     @GetMapping("disponible")
-    public ResponseEntity<HabitacionDTO> obtenerHabitacionDisponibleSegunCriterio(@PathVariable int idHotel, @Valid @RequestBody CriterioReservaHabitacionDTO criterioReservaHabitacionDTO) {
-        return ResponseEntity.ok(reservaService.obtenerHabitacionDisponibleSegunCriterio(idHotel, criterioReservaHabitacionDTO));
+    public ResponseEntity<HabitacionDTO> obtenerHabitacionDisponibleSegunCriterio(@PathVariable int idHotel,
+                                                                                  @RequestParam String fechaInicio,
+                                                                                  @RequestParam String fechaFin,
+                                                                                  @RequestParam int idCategoriaHabitacion,
+                                                                                  @RequestParam int ocupantes,
+                                                                                  @RequestParam int camas) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaInicioDate = null;
+        Date fechaFinDate = null;
+
+        try {
+            fechaInicioDate = dateFormat.parse(String.valueOf(fechaInicio));
+            fechaFinDate = dateFormat.parse(String.valueOf(fechaFin));
+        } catch (ParseException e) {
+            throw new ReservaException("Fecha introducida invalida");
+        }
+
+        return ResponseEntity.ok(reservaService.obtenerHabitacionDisponibleSegunCriterio(idHotel, CriterioReservaHabitacionDTO.builder()
+                .fechaInicio(fechaInicioDate)
+                .fechaFin(fechaFinDate)
+                .categoriaHabitacion(idCategoriaHabitacion)
+                .ocupantes(ocupantes)
+                .camas(camas)
+                .build()));
     }
 
     @Operation(summary = "Buscar habitaciones disponibles en rango de fecha", description = "Busca las habitaciones disponibles en un rango de fecha segun el criterio de reserva")
@@ -78,7 +101,11 @@ public class ReservaHotelController {
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRADOR') || hasRole('ROLE_GERENTE') || hasRole('ROLE_EMPLEADO') && principal.idHotelAsignado == #idHotel")
     @GetMapping("disponibles")
-    public ResponseEntity<Map<Date, List<Integer>>> obtenerHabitacionesDisponiblesEnRangoDeFecha(@PathVariable int idHotel, @Valid @RequestBody CriterioReservaHabitacionDTO criterioReservaHabitacionDTO, @RequestParam String fechaMesYAnio) {
+    public ResponseEntity<Map<Date, List<Integer>>> obtenerHabitacionesDisponiblesEnRangoDeFecha(@PathVariable int idHotel,
+                                                                                                 @RequestParam String fechaMesYAnio,
+                                                                                                 @RequestParam int idCategoriaHabitacion,
+                                                                                                 @RequestParam int ocupantes,
+                                                                                                 @RequestParam int camas) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date fecha = null;
 
@@ -88,6 +115,6 @@ public class ReservaHotelController {
             throw new ReservaException("Fecha introducida invalida");
         }
 
-        return ResponseEntity.ok(reservaService.obtenerHabitacionesDisponiblesEnRangoDeFecha(idHotel, criterioReservaHabitacionDTO, fecha));
+        return ResponseEntity.ok(reservaService.obtenerHabitacionesDisponiblesEnRangoDeFecha(idHotel, CriterioReservaHabitacionDTO.builder().categoriaHabitacion(idCategoriaHabitacion).camas(camas).ocupantes(ocupantes).build(), fecha));
     }
 }

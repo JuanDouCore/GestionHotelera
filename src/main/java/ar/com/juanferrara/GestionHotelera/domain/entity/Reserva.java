@@ -36,7 +36,7 @@ public class Reserva {
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado")
     private EstadoReservacion estadoReservacion;
 
@@ -54,7 +54,7 @@ public class Reserva {
     @Column(name = "fecha_egreso")
     private Date fechaEgreso;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "pension")
     private TipoPension tipoPension;
 }

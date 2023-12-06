@@ -60,6 +60,7 @@ public class ReservaServiceImpl implements ReservaService {
 
         reservaDTO.setHotel(hotelService.buscarHotelPorId(idHotel));
         reservaDTO.setHabitacion(habitacionService.buscarHabitacionPorNroYHotel(idHotel, crearReservaDTO.getNroHabitacion()));
+        reservaDTO.setEstadoReservacion(EstadoReservacion.RESERVADO);
         reservaDTO.setCliente(clienteService.buscarClientePorDni(crearReservaDTO.getDniCliente()));
         reservaDTO.setCostoTotal(calcularCostoTotalReserva(reservaDTO.getHabitacion().getPrecio(), reservaDTO.getFechaIngreso(), reservaDTO.getFechaEgreso()));
 

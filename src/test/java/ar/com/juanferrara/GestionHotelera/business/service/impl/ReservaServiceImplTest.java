@@ -139,7 +139,6 @@ class ReservaServiceImplTest {
                 .dniCliente(44560065)
                 .fechaIngreso(fechaIngreso)
                 .fechaEgreso(fechaEgreso)
-                .estadoReservacion(EstadoReservacion.RESERVADO)
                 .tipoPension(TipoPension.MEDIA)
                 .build();
     }

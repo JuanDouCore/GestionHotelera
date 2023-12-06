@@ -22,8 +22,6 @@ public class CrearReservaDTO {
     @Positive
     private int dniCliente;
 
-    private EstadoReservacion estadoReservacion;
-
     @PositiveOrZero
     private double cantidadAbonada;
 
