@@ -36,8 +36,8 @@ Se utiliza Spring Security junto con JWT para garantizar la seguridad de la API.
    ```
    mvn spring-boot:run
    ```
-### Opcion compilar en su ID
-1. Clona el repositorio en su ID
+### Opcion compilar en su IDE
+1. Clona el repositorio en su IDE
 2. Ejecute un build & run
 
 **Endpoint swagger documentacion:** localhost:8080/api/api-docs
