@@ -1,6 +1,6 @@
 # Sistema de Gestión Interna Hotelera 🏨
 ## Descripción del Proyecto
-API REST diseñada para la gestión interna de pequeñas cadenas de hoteles. Permite la creación de categorías de hoteles, hoteles dentro de estas categorías, categorías de habitaciones y asignación de habitaciones a hoteles. Además, facilita la gestión de reservas, desde la creación por habitación hasta la filtración y listado de reservas disponibles.
+API RESTful diseñada para la gestión interna de pequeñas cadenas de hoteles. Permite la creación de categorías de hoteles, hoteles dentro de estas categorías, categorías de habitaciones y asignación de habitaciones a hoteles. Además, facilita la gestión de reservas, desde la creación por habitación hasta la filtración y listado de reservas disponibles.
 
 ## Tecnologías Utilizadas 🛠️
 - Spring Boot 🌱
