@@ -21,34 +21,29 @@ Asignación de reservas para el hotel asignado. Administrar clientes.
 Se utiliza Spring Security junto con JWT para garantizar la seguridad de la API. A su vez también se utiliza Refresh-Tokens para poder renovar los JWT tokens y evitar su expiracion pronta. Los roles y privilegios se aplican a través de la autenticación.
 
 ## Endpoints API 🚀
-Categorías de Hoteles
-Crear Categoría de Hotel
-Método: POST
-/api/categorias-hoteles
-Hoteles
-Crear Hotel
-Método: POST
-/api/hoteles
-Categorías de Habitaciones
-Crear Categoría de Habitación
-Método: POST
-/api/categorias-habitaciones
-Habitaciones
-Crear Habitación
-Método: POST
-/api/habitaciones
-Reservas
-Crear Reserva
 
-Método: POST
-/api/reservas
-Listar Reservas Disponibles
+![image](https://github.com/JuanDouCore/GestionHotelera/assets/22947314/a7338e30-1e67-40d9-8c5a-623fc4b1f610)
 
-Método: GET
-/api/reservas/disponibles
-Filtrar Reservas
+## Ejecución
 
-Método: GET
-/api/reservas/filtrar
-Configuración de Seguridad 🛡️
-Se utiliza Spring Security junto con JWT para garantizar la seguridad de la API. Los roles y privilegios se aplican a través de la autenticación.
+### Opcion compilar con maven
+1. Clonar el repositorio
+2. Compila y instala depedencias con Maven
+   ```
+   mvn clean install
+   ```
+3. Ejecutar la aplicacion Spring Boot
+   ```
+   mvn spring-boot:run
+   ```
+### Opcion compilar en su ID
+1. Clona el repositorio en su ID
+2. Ejecute un build & run
+
+**Endpoint swagger documentacion:** localhost:8080/api/api-docs
+
+## Autor
+[![Juan Ferrara](https://img.shields.io/badge/LinkedIn-JuanFerrara-blue)](https://www.linkedin.com/in/juan-ferrara/)
+
+
+
