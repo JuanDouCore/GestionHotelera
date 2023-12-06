@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
-@Tag(name = "Categoria Hotel", description = "API para la gestión de categorias de hoteles")
+@Tag(name = "3. Categoria Hotel", description = "API para la gestión de categorias de hoteles")
 
 @RestController
 @RequestMapping("/api/categoriashoteles")

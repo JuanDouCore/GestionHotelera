@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "Reserva", description = "API para la gestión de reservas")
+@Tag(name = "8. Reserva", description = "API para la gestión de reservas")
 
 @RestController
 @RequestMapping("/api/reservas")

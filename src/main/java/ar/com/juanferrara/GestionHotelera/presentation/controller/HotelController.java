@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
-@Tag(name = "Hotel", description = "API para la gestión de hoteles")
+@Tag(name = "4. Hotel", description = "API para la gestión de hoteles")
 
 @Controller
 @RequestMapping("/api/hoteles")
@@ -32,7 +32,7 @@ public class HotelController {
     @Autowired
     private HotelService hotelService;
 
-    @Operation(summary = "Crear un hotel", description = "Crea un hotel con una categoria asignada")
+    @Operation(summary = "Crear un hotel", description = "Crea un hotel con una categoria asignada", security = {@SecurityRequirement(name = "Admin Authentication")})
     @ApiResponse(responseCode = "201", description = "Hotel creado")
 
     @PostMapping

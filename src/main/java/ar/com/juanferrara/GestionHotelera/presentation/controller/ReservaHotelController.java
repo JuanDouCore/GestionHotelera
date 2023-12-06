@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-@Tag(name = "Reserva Hotel", description = "API para la gestión de reservas de hoteles")
+@Tag(name = "9. Reserva Hotel", description = "API para la gestión de reservas de hoteles")
 
 @RestController
 @RequestMapping("/api/hoteles/{idHotel}/reservas")

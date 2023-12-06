@@ -1,9 +1,6 @@
 package ar.com.juanferrara.GestionHotelera.business.service.impl;
 
-import ar.com.juanferrara.GestionHotelera.business.mapper.impl.CrearReservaMapper;
-import ar.com.juanferrara.GestionHotelera.business.mapper.impl.CrearReservaMapperImpl;
-import ar.com.juanferrara.GestionHotelera.business.mapper.impl.ReservaMapper;
-import ar.com.juanferrara.GestionHotelera.business.mapper.impl.ReservaMapperImpl;
+import ar.com.juanferrara.GestionHotelera.business.mapper.impl.*;
 import ar.com.juanferrara.GestionHotelera.business.service.ClienteService;
 import ar.com.juanferrara.GestionHotelera.business.service.HabitacionService;
 import ar.com.juanferrara.GestionHotelera.business.service.HotelService;
@@ -13,6 +10,7 @@ import ar.com.juanferrara.GestionHotelera.domain.dto.generic.DireccionDTO;
 import ar.com.juanferrara.GestionHotelera.domain.dto.habitacion.HabitacionDTO;
 import ar.com.juanferrara.GestionHotelera.domain.dto.hotel.HotelDTO;
 import ar.com.juanferrara.GestionHotelera.domain.dto.reservas.CrearReservaDTO;
+import ar.com.juanferrara.GestionHotelera.domain.dto.reservas.InfoReservaDTO;
 import ar.com.juanferrara.GestionHotelera.domain.dto.reservas.ReservaDTO;
 import ar.com.juanferrara.GestionHotelera.domain.dto.usuarios.ClienteDTO;
 import ar.com.juanferrara.GestionHotelera.domain.entity.Reserva;
@@ -57,6 +55,8 @@ class ReservaServiceImplTest {
     private ReservaMapper reservaMapper = new ReservaMapperImpl();
     @Spy
     private CrearReservaMapper crearReservaMapper = new CrearReservaMapperImpl();
+    @Spy
+    private InfoReservaMapper infoReservaMapper = new InfoReservaMapperImpl();
 
     private ReservaDTO reservaDTO;
     private CrearReservaDTO crearReservaDTO;
@@ -113,8 +113,8 @@ class ReservaServiceImplTest {
 
         try {
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-            fechaIngreso = formato.parse("2023-11-15");
-            fechaEgreso = formato.parse("2023-11-20");
+            fechaIngreso = formato.parse("2023-12-15");
+            fechaEgreso = formato.parse("2023-12-20");
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -149,13 +149,13 @@ class ReservaServiceImplTest {
     @Test
     void crearReserva() {
         Reserva reserva = reservaMapper.toEntity(reservaDTO);
-        when(reservasRepository.verificarSiHabitacionEstaDisponible(1, 1, fechaIngreso, fechaEgreso)).thenReturn(true);
+        when(reservasRepository.verificarSiHabitacionEstaDisponible(1, 1, fechaIngreso, fechaEgreso)).thenReturn(false);
         when(hotelService.buscarHotelPorId(1)).thenReturn(hotel);
         when(habitacionService.buscarHabitacionPorNroYHotel(1, 1)).thenReturn(habitacion);
         when(clienteService.buscarClientePorDni(44560065)).thenReturn(cliente);
         when(reservasRepository.save(any(Reserva.class))).thenReturn(reserva);
 
-        /*ReservaDTO reservaCreada = reservaService.crearReserva(1, crearReservaDTO);
+        InfoReservaDTO reservaCreada = reservaService.crearReserva(1, crearReservaDTO);
 
         verify(reservasRepository).verificarSiHabitacionEstaDisponible(1, 1, fechaIngreso, fechaEgreso);
         verify(hotelService).buscarHotelPorId(1);
@@ -164,10 +164,10 @@ class ReservaServiceImplTest {
         verify(reservasRepository).save(any(Reserva.class));
         assertAll(() -> {
            assertEquals(1, reservaCreada.getId());
-           assertEquals(cliente, reservaCreada.getCliente());
-           assertEquals(hotel, reservaCreada.getHotel());
+           assertEquals(cliente.getDni(), reservaCreada.getDniCliente());
+           assertEquals(hotel.getId(), reservaCreada.getIdHotel());
            assertEquals(1000, reservaCreada.getCostoTotal());
-        });*/
+        });
     }
 
     @Test
@@ -175,7 +175,7 @@ class ReservaServiceImplTest {
         Date fechaEgresoSecondary = null;
         try {
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-            fechaEgresoSecondary = formato.parse("2023-11-25");
+            fechaEgresoSecondary = formato.parse("2023-12-25");
         } catch (ParseException e) {
             e.printStackTrace();
         }
