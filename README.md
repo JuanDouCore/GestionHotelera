@@ -16,7 +16,7 @@ Creación de habitaciones y categorías de habitaciones.
 Creación de empleados.
 Administración de reservas.
 - Empleado 👩‍💼:
-Asignación de reservas para el hotel asignado.
+Asignación de reservas para el hotel asignado. Administrar clientes.
 ## Configuración de Seguridad 🛡️
 Se utiliza Spring Security junto con JWT para garantizar la seguridad de la API. A su vez también se utiliza Refresh-Tokens para poder renovar los JWT tokens y evitar su expiracion pronta. Los roles y privilegios se aplican a través de la autenticación.
 
