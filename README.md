@@ -24,7 +24,7 @@ Se utiliza Spring Security junto con JWT para garantizar la seguridad de la API.
 
 ![image](https://github.com/JuanDouCore/GestionHotelera/assets/22947314/a7338e30-1e67-40d9-8c5a-623fc4b1f610)
 
-## Ejecución
+## Ejecución 🏃‍♂️
 
 ### Opcion compilar con maven
 1. Clonar el repositorio
@@ -42,7 +42,7 @@ Se utiliza Spring Security junto con JWT para garantizar la seguridad de la API.
 
 **Endpoint swagger documentacion:** localhost:8080/api/api-docs
 
-## Autor
+## Autor ✏️
 [![Juan Ferrara](https://img.shields.io/badge/LinkedIn-JuanFerrara-blue)](https://www.linkedin.com/in/juan-ferrara/)
 
 
